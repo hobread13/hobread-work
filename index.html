@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"> -->
+    <title>HTML List || APMALL > BEAUTYPOINT</title>
+    <!-- <link href="/pb/renew3/resource/css/core.css" rel="stylesheet">
+    <script src="/pb/renew3/resource/js/jquery-1.12.4.min.js"></script> -->
+    <link href="../resource/css/core.css" rel="stylesheet">
+    <script src="../resource/js/jquery-1.12.4.min.js"></script>
+    <style>
+      .status {background-color: #fff;}
+      .status h2,.status h3,.status h4 {position: -webkit-sticky;position: sticky;top: 0;z-index: 20;font-weight: 500;line-height: 35px;}
+      .status h1 {padding: 0 0 0 16px;font-size: 1.6rem;font-weight: 500;}
+      .status .view-all {position: absolute;top: 11px;right: 16px;}
+      .status h2 {padding: 0 16px;background-color: #f58220;font-size: 1.1rem;color: #ffffff;}
+      .status h3 {padding: 0 16px;background-color: #ddd;font-size: 1rem;}
+      .status h4 {padding: 0 16px 0 32px;background-color: #f8f8f8;border-top: 1px solid #ddd;font-size: 1rem;color: #7a7a7a;}
+      .status .desc {margin-top: 16px;padding: 0 16px;font-size: 0.8rem;line-height: 20px;}
+      .status .d1 {margin-top: 8px;border-top: 2px solid #222;}
+      .status .d1 > li {position: relative;border-bottom: 1px solid #222;}
+      .total {display: block;position: absolute;top: 0;right: 16px;z-index: 30;font-size: 0.9rem;color: #fff;font-weight: 300 !important;line-height: 35px;}
+      .status .d2 > li {border-top: 1px solid #ddd;}
+      .status .d3 > li {padding: 4px 0;}
+      .status dt,.status dd,.status p {font-size: 0.9rem;color: #666;}
+      .status dt {padding-right:40px; color: #000000;font-weight: 500;}
+      .status dt + dd {margin-top: 5px;}
+      .status dl {position: relative;border-top: 1px solid #ddd;padding: 5px 15px 5px 35px;}
+      .status li > dl:first-child { border-top: none;}
+      .status dl .number {display: block;position: absolute;top: 5px;left: 16px;width: 30px;font-size: 0.9rem;color: #888;}
+      .status .d4 > li > dl {padding-left: 62px;}
+      .status dt,.status dd {position: relative;}
+      .status .date {display: block;position: absolute;top: 0;right: 0;line-height: 1.5;}
+      .status dd.edit {margin-top: 10px;border-top: 1px solid #ddd;padding-top: 5px;}
+      .status dd.edit p {color: #888;}
+      .status p {line-height: 1.5;}
+      .status p.link{cursor:pointer;width:calc(100% - 80px);}
+      .status .lb {display: block;position: absolute;top: -1px;right: 0;width: 20px;height: 20px;background-color: #ddd;border-radius: 50%;}
+      .status .desc .lb {display: inline-block;position: relative;top: auto;right: auto; vertical-align: top;}
+      .status .lb:before {position: absolute;top: 0;left: 0;content: "미";width: 100%;height: 100%;font-size: 0.8rem;color: #666;font-weight: 300 !important;line-height: 20px;text-align: center;}
+      .status .lb.fin {background-color: #f58220;}
+      .status .lb.fin:before {content: "완";color: #fff;}
+      .status .lb.ing {background-color: #222;}
+      .status .lb.ing:before {content: "진";color: #fff;}
+      .status .lb.edit {background-color: #018a1b;}
+      .status .lb.edit:before {content: "수";color: #fff;}
+      .guideSection {position: relative;padding: 20px 0;}
+      .guideSection .grayInfoBox {margin: 0 16px;}
+      .guideSection h1 + * {margin-top: 16px !important;}
+    </style>
+    <script>
+      $(document).ready(function () {
+        $("h2").on("click", function () {
+          $(this).next(".d2").slideToggle("fast");
+        });
+        $(".d1 > li").each(function () {
+          var len = $(this).find("dl").length;
+          var lenF =
+            $(this).find("dl .lb.fin").length +
+            $(this).find("dl .lb.edit").length;
+          $(this).prepend(
+            '<span class="total">' + lenF + "/" + len + "</span>"
+          );
+          $(this)
+            .find("dl")
+            .each(function (index) {
+              $(this).prepend(
+                '<span class="number">' + (index + 1) + ".</span>"
+              );
+            });
+        });
+        $("dd").on("click", function () {
+          if (
+            $(this).prev("dt").find(".lb").hasClass("ing") ||
+            $(this).prev("dt").find(".lb").hasClass("fin") ||
+            $(this).prev("dt").find(".lb").hasClass("edit")
+          ) {
+            if (!$(this).hasClass("edit")) {
+              var link = $(this).find(".link").text();
+              window.open(link);
+            }
+          }
+        });
+        $("dd .date").on("click", function (e) {
+          e.stopPropagation();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="wrapper" class="status">
+
+      <div class="guideSection">
+        <h1>NOTICE</h1>
+        <div class="toggleBox">
+          <div class="grayInfoBox">
+            <strong class="infoHead">가이드 참고 URL :</strong>
+            <p><a target="_blank" href="http://apne2-dspdev-apmall7-markup-web.s3-website.ap-northeast-2.amazonaws.com">http://apne2-dspdev-apmall7-markup-web.s3-website.ap-northeast-2.amazonaws.com</a></p>
+			<br>
+            <strong class="infoHead">이관 작업 템플릿 및 가이드:</strong>
+            <p><a target="_blank" href="template.html">template.html</a></p>
+            <br>
+            <strong class="infoHead">뷰티포인트 설문 페이지:</strong>
+            <p><a target="_blank" href="/pb/bizsolution2/html/index.html">/pb/bizsolution2/html/index.html</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="guideSection">
+        <h1>BEAUTYPOINT LIST</h1>
+        <p class="desc">
+          미작업 : <span class="lb"></span> / 작업완료 : <span class="lb fin"></span> / 진행중 : <span class="lb ing"></span> / 수정완료 : <span class="lb edit"></span>
+        </p>
+        
+        <ul class="d1">
+          <li>
+            <h2>뷰티포인트 이관 작업 리스트</h2>
+            <ul class="d2">
+              <li>
+                <ul class="d2">
+                  <!-- ============================================ -->
+                  <li>
+                    <h3>전환하기 - web 서버</h3>
+                    <ul class="d3">
+                      <li>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            전환하기 메인
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/convert/convertToBp.html</p>
+                            <span class="date">2022-06-09</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>페이지 내 팝업 추가</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            전환하기 메인 > 자세히보기 팝업 > 하나머니
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/convert/modal/layerPopDtlHana.html</p>
+                            <span class="date">2022-06-09</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>풀 레이어 팝업</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            전환하기 메인 > 자세히보기 팝업 > L.Point
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/convert/modal/layerPopDtlLPoint.html</p>
+                            <span class="date">2022-06-09</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>풀 레이어 팝업</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            전환하기 메인 > 자세히보기 팝업 > OK캐시백
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/convert/modal/layerPopDtlOkcash.html</p>
+                            <span class="date">2022-06-09</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>풀 레이어 팝업</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            전환하기 메인 > 자세히보기 팝업 > 페이코포인트
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/convert/modal/layerPopDtlPayco.html</p>
+                            <span class="date">2022-06-09</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>풀 레이어 팝업</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            전환하기 메인 > 자세히보기 팝업 > 마이신한포인트
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/convert/modal/layerPopDtlShinhan.html</p>
+                            <span class="date">2022-06-09</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>풀 레이어 팝업</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            전환하기 메인 > 자세히보기 팝업 > 스마일캐시
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/convert/modal/layerPopDtlSmilepay.html</p>
+                            <span class="date">2022-06-09</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>풀 레이어 팝업</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            전환하기 메인 > 자세히보기 팝업 > SSG머니
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/convert/modal/layerPopDtlSsg.html</p>
+                            <span class="date">2022-06-09</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>풀 레이어 팝업</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            전환하기 메인 > 자세히보기 팝업 > 위비꿀머니
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/convert/modal/layerPopDtlWibi.html</p>
+                            <span class="date">2022-06-09</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>풀 레이어 팝업</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            개별 포인트 동의하기 상세페이지
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/convert/convertToBpAgree.html</p>
+                            <span class="date">2022-06-09</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>페이지 내 팝업 추가</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            개별 포인트 전환
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/convert/convertToBpEach.html</p>
+                            <span class="date">2022-06-09</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>페이지 내 팝업 추가</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            전체 포인트 전환
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/convert/convertToBpAll.html</p>
+                            <span class="date">2022-06-13</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>&nbsp;</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            전체&개별 포인트 전환 완료
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/convert/convertComplate.html</p>
+                            <span class="date">2022-06-13</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>&nbsp;</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- ============================================ -->
+                  <li>
+                    <h3>회원등급(승급 포인트)</h3>
+                    <ul class="d3">
+                      <li>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            회원등급 _ 이전
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/mypage/gradeMain.html</p>
+                            <span class="date">2022-06-25</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>회원등급 메인 페이지</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            회원등급 _ 수정
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/mypage/gradeMain_renew1.html</p>
+                            <span class="date">2022-06-25</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>회원등급 메인 페이지<br>
+                            	family : gradeMain_renew1.html<br>
+                            	green : gradeMain_renew2.html<br>
+                            	silver : gradeMain_renew3.html<br>
+                            	gold : gradeMain_renew4.html<br>
+                            	platinum : gradeMain_renew5.html
+                            </p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            회원등급 > 포인트 적립, 소멸 안내 상세 페이지
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/mypage/gradeDetail.html</p>
+                            <span class="date">2022-06-25</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>회원등급 포인트 적립, 소멸 안내 상세 페이지</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- ============================================ -->
+                  <li>
+                    <h3>상세내역 조회</h3>
+                    <ul class="d3">
+                      <li>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                         	뷰티포인트 전체내역 탭
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/mypage/pointDetailAll.html</p>
+                            <span class="date">2022-06-27</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>뷰티포인트 상세내역 메인</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                               뷰티포인트 소멸예정 탭
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/mypage/pointDetailExtintion.html</p>
+                            <span class="date">2022-06-27</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>뷰티포인트 소멸예정 페이지</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                               뷰티포인트 정책안내 팝업
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/mypage/beauty_point_popup.html</p>
+                            <span class="date">2022-07-15</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>아모레몰에서 뷰티포인트로 이동</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- ============================================ -->
+                  <li>
+                    <h3>구매내역 조회/스마트 영수증/영수증 복권/스마트 영수증 설정 및 수신 동의 * 개선필요건</h3>
+                    <ul class="d3">
+                      <li>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            스마트영수증 상세페이지(결제내역/제품 구매내역)
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/receipt/receiptMain.html</p>
+                            <span class="date">2022-07-13</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>결제내역, 제품 구매내역 - 탭처리</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            스마트 영수증 설정 페이지
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/receipt/receiptAgree.html</p>
+                            <span class="date">2022-07-13</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>동의 페이지</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            영수증 상세페이지(통합)
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/receipt/receiptDetail_amorepacific.html</p>
+                            <span class="date">2022-07-13</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>아모레퍼시픽 통합 영수증</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            영수증 상세페이지(방판)
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/receipt/receiptDetail_doorToDoor.html</p>
+                            <span class="date">2022-07-13</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>아모레퍼시픽 방판 영수증</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            영수증 상세페이지(아리따움)
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/receipt/receiptDetail_aritaum.html</p>
+                            <span class="date">2022-07-13</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>아리따움 영수증</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            영수증 상세페이지(이니스프리)
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/receipt/receiptDetail_innisfree.html</p>
+                            <span class="date">2022-07-13</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>이니스프리 영수증</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            영수증 복권 상세페이지
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/receipt/receiptEvent.html</p>
+                            <span class="date">2022-07-13</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>구_이벤트 페이지</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            복권 > 스마트영수증 상세페이지(상단 복권 영역 노출)
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/receipt/receiptDetail.html</p>
+                            <span class="date">2022-07-13</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>상단 복권 영역 노출</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- ============================================ -->
+                  <li>
+                    <h3>회원정보 수정</h3>
+                    <ul class="d3">
+                      <li>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                             	비밀번호 확인
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/member/memberInfoPw.html</p>
+                            <span class="date">2022-07-10</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>회원정보 수정 > 비밀번호 확인</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                             	회원정보 수정
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/member/memberInfoDetail.html</p>
+                            <span class="date">2022-07-10</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>회원정보 수정 > 회원정보 수정 상세페이지</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                             	휴대전화 번호 변경
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/member/memberInfoMobile.html</p>
+                            <span class="date">2022-07-10</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>회원정보 수정 > 휴대전화 번호 변경</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- ============================================ -->
+                  <li>
+                    <h3>선물하기</h3>
+                    <ul class="d3">
+                      <li>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                           	 선물하기 메인
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/gift/giftMain.html</p>
+                            <span class="date">2022-07-05</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>선물하기 메인</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                           	 선물하기 상세페이지
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/gift/giftDetail.html</p>
+                            <span class="date">2022-07-05</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>선물하기 버튼 > 선물하기 상세페이지</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                           	 선물하기 완료페이지
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/gift/giftCompLayerPop.html</p>
+                            <span class="date">2022-07-05</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>선물하기 버튼 > 선물하기 상세페이지 > 선물하기 완료페이지</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                           	 나의 선물함 - 받은 포인트
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/gift/giftListGet.html</p>
+                            <span class="date">2022-07-05</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>선물함 버튼 > 선물함 상세페이지 > (T) 받은 포인트</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                           	 나의 선물함 - 보낸 포인트
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/gift/giftListGive.html</p>
+                            <span class="date">2022-07-05</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>선물함 버튼 > 선물함 상세페이지 > (T) 보낸 포인트</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- ============================================ -->
+                  <li>
+                    <h3>행운 퀴즈</h3>
+                    <ul class="d3">
+                      <li>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            행운퀴즈 상세페이지
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/quiz/quizMain.html</p>
+                            <span class="date">2022-07-26</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>주관식/객관식/1개선택/다중선택/밸런스퀴즈/힌트 - 모두 포함</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            행운퀴즈 힌트 페이지
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/quiz/quizHint.html</p>
+                            <span class="date">2022-07-26</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>이미지 가로 100%</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- ============================================ -->
+                  <li>
+                    <h3>회원탈퇴</h3>
+                    <ul class="d3">
+                      <li>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                              	회원탈퇴 상세
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/member/memberCancel.html</p>
+                            <span class="date">2022-07-15</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>회원탈퇴  > 회원탈퇴 상세페이지</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                              	회원탈퇴 완료
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr//pb/renew3/html/member/memberCancelComp.html</p>
+                            <span class="date">2022-07-15</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>회원탈퇴 > 회원탈퇴 완료페이지 </p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- ============================================ -->
+                  <li>
+                    <h3>이용약관, 개인정보취급정보</h3>
+                    <ul class="d3">
+                      <li>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            이용약관
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/footer/agreement.html</p>
+                            <span class="date">2022-07-18</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>이용약관 : to-be</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            이용약관(구버전)
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/footer/agreement_before.html</p>
+                            <span class="date">2022-07-18</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>이용약관 : as-is</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            개인정보취급정보
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/footer/privacy.html</p>
+                            <span class="date">2022-07-18</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>개인정보취급정보 : to-be</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            개인정보취급정보(구버전)
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/footer/privacy_before.html</p>
+                            <span class="date">2022-07-18</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>개인정보취급정보 : as-is</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            [별첨1] 개인정보 수집 항목 및 이용목적 상세보기
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/footer/modal/prvc_add_first_202206.html</p>
+                            <span class="date">2022-07-18</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>202206</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            [별첨1] 개인정보 수집 항목 및 이용목적 상세보기
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/footer/modal/prvc_add_first_202202.html</p>
+                            <span class="date">2022-07-18</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>202202</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            [별첨1] 개인정보 수집 항목 및 이용목적 상세보기
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/footer/modal/prvc_add_first_202201_2.html</p>
+                            <span class="date">2022-07-18</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>202201_2</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            [별첨1] 개인정보 수집 항목 및 이용목적 상세보기
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/footer/modal/prvc_add_first_202201.html</p>
+                            <span class="date">2022-07-18</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>202201</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            [별첨2] 행태정보 수집 및 이용, 제공 상세보기
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/footer/modal/privacy_add_20190228_4c.html</p>
+                            <span class="date">2022-07-18</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>&nbsp;</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            [별첨3] 개인정보 처리위탁을 받는 수탁자와 그 업무내용 상세보기
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/footer/modal/prvc_add_third_202207.html</p>
+                            <span class="date">2022-07-18</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>202207</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            [별첨3] 개인정보 처리위탁을 받는 수탁자와 그 업무내용 상세보기
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/footer/modal/prvc_add_third_202206.html</p>
+                            <span class="date">2022-07-18</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>202206</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            [별첨3] 개인정보 처리위탁을 받는 수탁자와 그 업무내용 상세보기
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/footer/modal/prvc_add_third_202203.html</p>
+                            <span class="date">2022-07-18</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>202203</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            [별첨3] 개인정보 처리위탁을 받는 수탁자와 그 업무내용 상세보기
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/footer/modal/prvc_add_third_202202.html</p>
+                            <span class="date">2022-07-18</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>202202</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            [별첨3] 개인정보 처리위탁을 받는 수탁자와 그 업무내용 상세보기
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/footer/modal/prvc_add_third_202201.html</p>
+                            <span class="date">2022-07-18</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>202201</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            [별첨3] 개인정보 처리위탁을 받는 수탁자와 그 업무내용 상세보기
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/footer/modal/prvc_add_third_202112.html</p>
+                            <span class="date">2022-07-18</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>202112</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            [별첨3] 개인정보 처리위탁을 받는 수탁자와 그 업무내용 상세보기
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/footer/modal/prvc_add_third_202109.html</p>
+                            <span class="date">2022-07-18</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>202109</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            팝업 : 카운셀러몰판매자
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/footer/modal/counSelorList.html</p>
+                            <span class="date">2022-07-18</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>&nbsp;</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            팝업 : 아모레몰판매자
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/footer/modal/slist.html</p>
+                            <span class="date">2022-07-18</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>&nbsp;</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            팝업 : 커스텀미판매자
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/footer/modal/customMeList.html</p>
+                            <span class="date">2022-07-18</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>
+                            	기타
+                            	<a href="/pb/renew3/html/footer/modal/smartStore.html">smartStore.html</a> / 
+                            	<a href="/pb/renew3/html/footer/modal/store.html">store.html</a>
+                           	</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- ============================================ -->
+                  <li>
+                    <h3>뷰티포인트 가이드 내용 전체 이관 * 개선필요건</h3>
+                    <ul class="d3">
+                      <li>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            (T)이용안내
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/guide/guide.html</p>
+                            <span class="date">2022-08-03</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>2022-07-27</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->                        
+                        <dl>
+                          <dt>
+                            (T)이용안내 > 제품 구매 포인트 적립 유의사항 버튼 > 유의사항 페이지
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/guide/modal/pointAccumulate.html</p>
+                            <span class="date">2022-08-03</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>풀레이어팝업</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                         <!-- // -->
+                         <dl>
+                          <dt>
+                            (T)이용안내 > 아모레몰 적립 상세 안내 버튼 > 아모레몰 적립 안내 페이지
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/guide/modal/amoremall_point.html</p>
+                            <span class="date">2022-09-21</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>풀레이어팝업</p>
+                          </dd>
+                        </dl> 
+                        <dl>
+                          <dt>
+                            (T)이용안내 > 브랜드별 적립 안내 버튼 > 브랜드별 적립 안내 > (T)화장품 브랜드
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/guide/modal/brandAccumulate_cosmetics.html</p>
+                            <span class="date">2022-08-03</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>풀레이어팝업</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            (T)이용안내 > 브랜드별 적립 안내 버튼 > 브랜드별 적립 안내 > (T)생활용품 브랜드
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/guide/modal/brandAccumulate_life.html</p>
+                            <span class="date">2022-08-03</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>풀레이어팝업</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            (T)이용안내 > 브랜드별 적립 안내 버튼 > 브랜드별 적립 안내 > (T)건강 브랜드
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/guide/modal/brandAccumulate_health.html</p>
+                            <span class="date">2022-08-03</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>풀레이어팝업</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->              
+                        <dl>
+                          <dt>
+                            (T)이용안내 > 수거 장소 및 상세 안내 버튼 > 수거 장소 및 상세 안내 페이지
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/guide/modal/emptiesPoint.html</p>
+                            <span class="date">2022-08-03</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>풀레이어팝업</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            (T)이용안내 > ‘사용처별 포인트 부분’ 사용 기준 보기 버튼 > '사용처별 포인트 부분’ 사용 기준 보기 페이지
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/guide/modal/usePoint.html</p>
+                            <span class="date">2022-08-03</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>풀레이어팝업</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            (T)제휴카드
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/guide/alliance_card.html</p>
+                            <span class="date">2022-08-04</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>2022-08-04</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            (T)제휴카드 > 카드 전체보기 버튼 > 카드 전체보기 페이지
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/guide/modal/card_all.html</p>
+                            <span class="date">2022-08-04</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>풀레이어팝업</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- ============================================ -->
+                  <li>
+                    <h3>뷰티포인트 쿠폰 등록</h3>
+                    <ul class="d3">
+                      <li>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            뷰티포인트 쿠폰 등록
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/coupon/couponApply.html</p>
+                            <span class="date">2022-10-24</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>&nbsp;</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            뷰티포인트 쿠폰 등록 완료
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/coupon/couponComplete.html</p>
+                            <span class="date">2022-10-24</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>&nbsp;</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- ============================================ -->
+                  <li>
+                    <h3>뷰티포인트 오픈톡방 게이트</h3>
+                    <ul class="d3">
+                      <li>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            오픈톡방 참여하기
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/sProject/survey.html</p>
+                            <span class="date">2022-09-14</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>&nbsp;</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            설문1
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/sProject/surveyDetail_01.html</p>
+                            <span class="date">2022-09-14</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>&nbsp;</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            설문2
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/sProject/surveyDetail_02.html</p>
+                            <span class="date">2022-09-14</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>&nbsp;</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            설문3
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/sProject/surveyDetail_03.html</p>
+                            <span class="date">2022-09-14</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>&nbsp;</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            완료
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/sProject/surveyResult.html</p>
+                            <span class="date">2022-09-14</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>&nbsp;</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            기프트 신청하기
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/sProject/welcomekitApply.html</p>
+                            <span class="date">2022-09-14</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>&nbsp;</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            기프트 신청하 입력
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/sProject/welcomekitOrder.html</p>
+                            <span class="date">2022-09-14</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>&nbsp;</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            팝업 01 ~ 10
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/sProject/survey_pop01.html</p>
+                            <span class="date">2022-09-14</span>
+                          </dd>
+                          <dd class="edit">
+                            <p><a href="https://dev-app.beautypoint.co.kr/pb/renew3/html/sProject/survey_pop02.html">survey_pop02.html</a></p>
+                            <p><a href="https://dev-app.beautypoint.co.kr/pb/renew3/html/sProject/survey_pop03.html">survey_pop03.html</a></p>
+                            <p><a href="https://dev-app.beautypoint.co.kr/pb/renew3/html/sProject/survey_pop04.html">survey_pop04.html</a></p>
+                            <p><a href="https://dev-app.beautypoint.co.kr/pb/renew3/html/sProject/survey_pop05.html">survey_pop05.html</a></p>
+                            <p><a href="https://dev-app.beautypoint.co.kr/pb/renew3/html/sProject/survey_pop06.html">survey_pop06.html</a></p>
+                            <p><a href="https://dev-app.beautypoint.co.kr/pb/renew3/html/sProject/survey_pop07.html">survey_pop07.html</a></p>
+                            <p><a href="https://dev-app.beautypoint.co.kr/pb/renew3/html/sProject/survey_pop08.html">survey_pop08.html</a></p>
+                            <p><a href="https://dev-app.beautypoint.co.kr/pb/renew3/html/sProject/survey_pop09.html">survey_pop09.html</a></p>
+                            <p><a href="https://dev-app.beautypoint.co.kr/pb/renew3/html/sProject/survey_pop10.html">survey_pop10.html</a></p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- ============================================ -->
+                  <li>
+                    <h3>뷰포 설문</h3>
+                    <ul class="d3">
+                      <li>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            test
+                            <span class="lb"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">/test/test/test.html</p>
+                            <span class="date">0000-00-00</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>test</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            test
+                            <span class="lb"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">/test/test/test.html</p>
+                            <span class="date">0000-00-00</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>test</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- ============================================ -->
+                  <li>
+                    <h3>뷰티포인트 -web 선셋 페이지</h3>
+                    <ul class="d3">
+                      <li>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            선셋 페이지
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/sunset/main.html</p>
+                            <span class="date">0000-00-00</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>&nbsp;</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- ============================================ -->
+                  <li>
+                    <h3>기타 - 에러페이지</h3>
+                    <ul class="d3">
+                      <li>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            서버데이터 오류
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/error/error1.html</p>
+                            <span class="date">2022-08-02</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>&nbsp;</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            시스템 정기 점검
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/error/error2.html</p>
+                            <span class="date">2022-08-02</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>&nbsp;</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                        <dl>
+                          <dt>
+                            404 페이지 오류
+                            <span class="lb fin"></span><!-- 완:fin / 진:ing / 수:edit -->
+                          </dt>
+                          <dd>
+                            <p class="link">https://dev-app.beautypoint.co.kr/pb/renew3/html/error/error3.html</p>
+                            <span class="date">2022-08-02</span>
+                          </dd>
+                          <dd class="edit">
+                            <p>&nbsp;</p>
+                          </dd>
+                        </dl>
+                        <!-- // -->
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- ============================================ -->
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
